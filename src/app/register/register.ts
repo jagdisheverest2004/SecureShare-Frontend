@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-register',
@@ -46,7 +47,7 @@ export class RegisterComponent {
       return;
     }
     this.loading = true;
-    this.http.post('http://localhost:8080/api/auth/otp/send', { email: this.email }).subscribe({
+  this.http.post(`${environment.BACKEND_URL}/api/auth/otp/send`, { email: this.email }).subscribe({
       next: () => {
         this.loading = false;
         this.otpRequested = true;
@@ -68,7 +69,7 @@ export class RegisterComponent {
     }
     this.loading = true;
     this.http
-      .post('http://localhost:8080/api/auth/otp/verify', { email: this.email, otp: this.otp })
+      .post(`${environment.BACKEND_URL}/api/auth/otp/verify`, { email: this.email, otp: this.otp })
       .subscribe({
         next: () => {
           this.loading = false;
@@ -95,7 +96,7 @@ export class RegisterComponent {
     }
     this.loading = true;
     this.http
-      .post('http://localhost:8080/api/auth/authenticate/signup', {
+      .post(`${environment.BACKEND_URL}/api/auth/authenticate/signup`, {
         username: this.name,
         email: this.email,
         password: this.password,

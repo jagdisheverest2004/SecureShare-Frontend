@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment.prod';
 
 interface FileData {
   id: number;
@@ -26,7 +27,7 @@ export class FileService {
   private filesSubject = new BehaviorSubject<FileData[]>([]);
   files$ = this.filesSubject.asObservable();
 
-  private baseUrl = 'http://localhost:8080/api/files';
+  private baseUrl = `${environment.BACKEND_URL}/api/files`;
 
   constructor(private http: HttpClient) {}
 

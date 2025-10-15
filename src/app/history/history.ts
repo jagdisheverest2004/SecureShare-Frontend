@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar';
 
@@ -61,7 +62,7 @@ export class HistoryComponent implements OnInit {
   ];
   clearAllLogs() {
     this.http
-      .delete('http://localhost:8080/api/auth/logs/delete-all', {
+      .delete(`${environment.BACKEND_URL}/api/auth/logs/delete-all`, {
         withCredentials: true,
         responseType: 'text', // 🔹 accept plain string instead of JSON
       })
@@ -127,7 +128,7 @@ export class HistoryComponent implements OnInit {
     this.loading = true;
     this.http
       .get<AuditLogsResponse>(
-        `http://localhost:8080/api/auth/logs/my-logs?pageNumber=${this.pageNumber + 1}&pageSize=${
+        `${environment.BACKEND_URL}/api/auth/logs/my-logs?pageNumber=${this.pageNumber + 1}&pageSize=${
           this.pageSize
         }`,
         { withCredentials: true }

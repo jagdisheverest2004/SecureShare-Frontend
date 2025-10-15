@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { environment } from '../../environments/environment.prod';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -149,7 +150,7 @@ export class MyWalletComponent implements OnInit, AfterViewInit {
   loadPage() {
     this.http
       .get<FilesResponse>(
-        `http://localhost:8080/api/auth/files/fetch-all?pageNumber=${
+        `${environment.BACKEND_URL}/api/auth/files/fetch-all?pageNumber=${
           this.currentPage + 1
         }&pageSize=${this.pageSize}`,
         { withCredentials: true }
@@ -192,7 +193,7 @@ export class MyWalletComponent implements OnInit, AfterViewInit {
   searchAndHighlight() {
     this.http
       .get<FilesResponse>(
-        `http://localhost:8080/api/auth/files/fetch-all?keyword=${encodeURIComponent(
+        `${environment.BACKEND_URL}/api/auth/files/fetch-all?keyword=${encodeURIComponent(
           this.highlightFileName!
         )}&pageNumber=1&pageSize=${this.pageSize}`,
         { withCredentials: true }
@@ -237,7 +238,7 @@ export class MyWalletComponent implements OnInit, AfterViewInit {
     }
     this.http
       .get<FilesResponse>(
-        `http://localhost:8080/api/auth/files/fetch-all?keyword=${encodeURIComponent(
+        `${environment.BACKEND_URL}/api/auth/files/fetch-all?keyword=${encodeURIComponent(
           this.searchQuery
         )}&pageNumber=${this.currentPage + 1}&pageSize=${this.pageSize}`,
         { withCredentials: true }
@@ -324,7 +325,7 @@ export class MyWalletComponent implements OnInit, AfterViewInit {
   downloadDecrypted(file: FileData, event: MouseEvent) {
     event.stopPropagation();
     this.http
-      .get(`http://localhost:8080/api/auth/files/download/${file.id}`, {
+      .get(`${environment.BACKEND_URL}/api/auth/files/download/${file.id}`, {
         responseType: 'blob',
         withCredentials: true,
       })
@@ -344,7 +345,7 @@ export class MyWalletComponent implements OnInit, AfterViewInit {
   downloadEncrypted(file: FileData, event: MouseEvent) {
     event.stopPropagation();
     this.http
-      .get(`http://localhost:8080/api/auth/files/download/encrypted/${file.id}`, {
+      .get(`${environment.BACKEND_URL}/api/auth/files/download/encrypted/${file.id}`, {
         responseType: 'blob',
         withCredentials: true,
       })

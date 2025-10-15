@@ -4,6 +4,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { SidebarComponent } from '../sidebar/sidebar';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 interface FetchFileResponse {
   id: number;
@@ -155,7 +156,7 @@ export class DashboardComponent implements OnInit {
   // ✅ Fetch data from backend
   fetchDashboardData() {
     this.http
-      .get<FetchFilesResponse>('http://localhost:8080/api/auth/files/fetch-all', {
+  .get<FetchFilesResponse>(`${environment.BACKEND_URL}/api/auth/files/fetch-all`, {
         withCredentials: true,
       })
       .subscribe({

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 import { AuthService } from '../services/authservice';
 
 @Component({
@@ -26,7 +27,7 @@ export class LoginComponent {
     localStorage.setItem('username', this.username);
 
     this.http
-      .post('http://localhost:8080/api/auth/authenticate/signin', {
+      .post(`${environment.BACKEND_URL}/api/auth/authenticate/signin`, {
         username: this.username,
         password: this.password,
       })

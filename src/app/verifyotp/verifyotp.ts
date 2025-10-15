@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-verifyotp',
@@ -31,7 +32,7 @@ export class VerifyOtpComponent {
     }
     this.http
       .post(
-        'http://localhost:8080/api/auth/authenticate/verify-otp',
+  `${environment.BACKEND_URL}/api/auth/authenticate/verify-otp`,
         {
           username: this.username,
           otp: this.otp,

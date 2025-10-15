@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth'; // your backend endpoint
+  private apiUrl = `${environment.BACKEND_URL}/api/auth`; // your backend endpoint
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

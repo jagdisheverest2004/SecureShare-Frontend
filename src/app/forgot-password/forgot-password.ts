@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-forgot-password',
@@ -29,7 +30,7 @@ export class ForgotPasswordComponent {
     this.loading = true;
 
     this.http
-      .post('http://localhost:8080/api/auth/user-utils/initiate', {
+      .post(`${environment.BACKEND_URL}/api/auth/user-utils/initiate`, {
         email: this.email,
       })
       .subscribe({

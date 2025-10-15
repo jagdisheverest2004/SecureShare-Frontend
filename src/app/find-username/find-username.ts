@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-find-username',
@@ -28,7 +29,7 @@ export class ForgotUsernameComponent {
     this.loading = true;
 
     this.http
-      .post('http://localhost:8080/api/auth/user-utils/find-username', { email: this.email })
+      .post(`${environment.BACKEND_URL}/api/auth/user-utils/find-username`, { email: this.email })
       .subscribe({
         next: (res: any) => {
           this.loading = false;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-resetpassword',
@@ -35,7 +36,7 @@ export class Resetpassword {
     this.error = '';
 
     this.http
-      .post('http://localhost:8080/api/auth/user-utils/reset', {
+      .post(`${environment.BACKEND_URL}/api/auth/user-utils/reset`, {
         email: this.email,
         otp: this.otp,
         newPassword: this.newPassword,

@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-share',
@@ -16,7 +17,7 @@ import { SidebarComponent } from '../sidebar/sidebar';
 export class ShareComponent implements OnInit {
   isSidebarClosed = false;
   fileId: string | null = null;
-  private apiUrl = 'http://localhost:8080/api/auth/shared-files/share';
+  private apiUrl = `${environment.BACKEND_URL}/api/auth/shared-files/share`;
 
   recipientUsername = '';
   isSensitive: boolean | null = null;

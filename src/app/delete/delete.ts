@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 import { SidebarComponent } from '../sidebar/sidebar';
 
 interface PagedUsernamesResponse {
@@ -84,7 +85,7 @@ export class DeleteFileComponent implements OnInit, OnDestroy {
     this.errorMsg = '';
     this.http
       .get<PagedUsernamesResponse>(
-        `http://localhost:8080/api/auth/shared-files/fetch-shared/${this.fileId}?pageNumber=${this.pageNumber}&pageSize=${this.pageSize}`,
+        `${environment.BACKEND_URL}/api/auth/shared-files/fetch-shared/${this.fileId}?pageNumber=${this.pageNumber}&pageSize=${this.pageSize}`,
         { withCredentials: true }
       )
       .subscribe({
@@ -111,7 +112,7 @@ export class DeleteFileComponent implements OnInit, OnDestroy {
 
   deleteForMe(): void {
     this.http
-      .delete(`http://localhost:8080/api/auth/files/delete/${this.fileId}`, {
+      .delete(`${environment.BACKEND_URL}/api/auth/files/delete/${this.fileId}`, {
         withCredentials: true,
         body: { deletionType: 'me' },
       })
@@ -129,7 +130,7 @@ export class DeleteFileComponent implements OnInit, OnDestroy {
 
   deleteForEveryone(): void {
     this.http
-      .delete(`http://localhost:8080/api/auth/files/delete/${this.fileId}`, {
+      .delete(`${environment.BACKEND_URL}/api/auth/files/delete/${this.fileId}`, {
         withCredentials: true,
         body: { deletionType: 'everyone' },
       })
@@ -161,7 +162,7 @@ export class DeleteFileComponent implements OnInit, OnDestroy {
     }
 
     this.http
-      .delete(`http://localhost:8080/api/auth/files/delete/${this.fileId}`, {
+      .delete(`${environment.BACKEND_URL}/api/auth/files/delete/${this.fileId}`, {
         withCredentials: true,
         body: {
           deletionType: 'list',

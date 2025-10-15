@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-otpforpassword',
@@ -17,7 +18,7 @@ export class otpforpasswordreset {
 
   constructor(private http: HttpClient, private router: Router) {}
   verify() {
-    this.http.post('http://localhost:8080/api/auth/user-utils/reset', { otp: this.otp }).subscribe({
+  this.http.post(`${environment.BACKEND_URL}/api/auth/user-utils/reset`, { otp: this.otp }).subscribe({
       next: () => {
         this.router.navigateByUrl('/confirmpassword'); // go to reset password page
       },

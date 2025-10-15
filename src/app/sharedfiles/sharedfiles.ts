@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../sidebar/sidebar';
 import { PaginationService, PaginatedResponse } from '../services/pagination';
@@ -132,7 +133,7 @@ export class SharedFilesComponent implements OnInit, AfterViewInit {
   // Fetch with Pagination
   fetchSharedFiles() {
     this.http
-      .get<PaginatedResponse<SharedFile>>('http://localhost:8080/api/auth/shared-files/by-me', {
+      .get<PaginatedResponse<SharedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/by-me`, {
         params: {
           pageNumber: (this.currentPage + 1).toString(),
           pageSize: this.pageSize.toString(),
@@ -159,9 +160,7 @@ export class SharedFilesComponent implements OnInit, AfterViewInit {
     }
 
     this.http
-      .get<SharedFile[]>(
-        `http://localhost:8080/api/auth/shared-files/search?query=${this.searchQuery}`
-      )
+      .get<SharedFile[]>(`${environment.BACKEND_URL}/api/auth/shared-files/search?query=${this.searchQuery}`)
       .subscribe({
         next: (res) => {
           this.allFiles = res;
@@ -241,7 +240,7 @@ export class SharedFilesComponent implements OnInit, AfterViewInit {
   // Load page with pagination
   loadPage() {
     this.http
-      .get<PaginatedResponse<SharedFile>>('http://localhost:8080/api/auth/shared-files/by-me', {
+      .get<PaginatedResponse<SharedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/by-me`, {
         params: {
           pageNumber: (this.currentPage + 1).toString(),
           pageSize: this.pageSize.toString(),
@@ -288,7 +287,7 @@ export class SharedFilesComponent implements OnInit, AfterViewInit {
     }
 
     this.http
-      .get<PaginatedResponse<SharedFile>>(`http://localhost:8080/api/auth/shared-files/by-me`, {
+      .get<PaginatedResponse<SharedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/by-me`, {
         params: {
           keyword: this.searchQuery,
           pageNumber: (this.currentPage + 1).toString(),

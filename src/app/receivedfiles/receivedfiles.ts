@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../sidebar/sidebar';
 import { PaginationService, PaginatedResponse } from '../services/pagination';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.prod';
 
 interface ReceivedFile {
   senderName: string;
@@ -120,7 +121,7 @@ export class ReceivedFilesComponent implements OnInit, AfterViewInit {
 
   fetchReceivedFiles() {
     this.http
-      .get<PaginatedResponse<ReceivedFile>>('http://localhost:8080/api/auth/shared-files/to-me', {
+      .get<PaginatedResponse<ReceivedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/to-me`, {
         params: {
           pageNumber: this.currentPage.toString(),
           pageSize: this.pageSize.toString(),
@@ -182,7 +183,7 @@ export class ReceivedFilesComponent implements OnInit, AfterViewInit {
     }
 
     this.http
-      .get<PaginatedResponse<ReceivedFile>>('http://localhost:8080/api/auth/shared-files/to-me', {
+      .get<PaginatedResponse<ReceivedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/to-me`, {
         params: {
           keyword: this.searchQuery,
           pageNumber: (this.currentPage + 1).toString(),
@@ -236,7 +237,7 @@ export class ReceivedFilesComponent implements OnInit, AfterViewInit {
 
   loadPage() {
     this.http
-      .get<PaginatedResponse<ReceivedFile>>('http://localhost:8080/api/auth/shared-files/to-me', {
+      .get<PaginatedResponse<ReceivedFile>>(`${environment.BACKEND_URL}/api/auth/shared-files/to-me`, {
         params: {
           pageNumber: (this.currentPage + 1).toString(),
           pageSize: this.pageSize.toString(),

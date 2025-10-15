@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-upload',
@@ -200,7 +201,7 @@ export class UploadComponent implements OnInit {
       category: categoryToSend,
     }).toString();
 
-    this.http.post(`http://localhost:8080/api/auth/files/upload?${params}`, fd).subscribe({
+  this.http.post(`${environment.BACKEND_URL}/api/auth/files/upload?${params}`, fd).subscribe({
       next: () => {
         this.uploadSuccess = true;
         this.uploadMessage = '✅ File(s) uploaded successfully!';

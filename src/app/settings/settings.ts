@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { environment } from '../../environments/environment.prod';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -88,7 +89,7 @@ export class SettingsComponent implements OnInit {
       this.loading.user = true;
       this.http
         .get<{ username: string; email: string }>(
-          'http://localhost:8080/api/auth/user-utils/settings',
+          `${environment.BACKEND_URL}/api/auth/user-utils/settings`,
           {
             withCredentials: true,
           }
@@ -120,8 +121,8 @@ export class SettingsComponent implements OnInit {
   downloadKey(type: 'public' | 'private') {
     const endpoint =
       type === 'public'
-        ? 'http://localhost:8080/api/auth/keys/download-public-key'
-        : 'http://localhost:8080/api/auth/keys/download-private-key';
+  ? `${environment.BACKEND_URL}/api/auth/keys/download-public-key`
+  : `${environment.BACKEND_URL}/api/auth/keys/download-private-key`;
 
     this.http
       .get(endpoint, {
@@ -148,7 +149,7 @@ export class SettingsComponent implements OnInit {
     this.busy.delete = true;
 
     this.http
-      .delete('http://localhost:8080/api/auth/user-utils/delete-account', { withCredentials: true })
+  .delete(`${environment.BACKEND_URL}/api/auth/user-utils/delete-account`, { withCredentials: true })
       .subscribe({
         next: () => {
           this.busy.delete = false;
@@ -172,7 +173,7 @@ export class SettingsComponent implements OnInit {
     this.error = '';
 
     this.http
-      .post('http://localhost:8080/api/auth/authenticate/signout', {}, { withCredentials: true })
+  .post(`${environment.BACKEND_URL}/api/auth/authenticate/signout`, {}, { withCredentials: true })
       .subscribe({
         next: () => {
           localStorage.removeItem('username');
