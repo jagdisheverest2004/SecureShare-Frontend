@@ -31,21 +31,31 @@
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "1.5MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kB",
-                  "maximumError": "10kB"
-                },
-                {
-                  "type": "any",
-                  "maximumWarning": "15kb", 
-                  "maximumError": "20kb"
-                }
+                  {
+                    "type": "initial",
+                    "maximumWarning": "1mb", 
+                    "maximumError": "1.5mb"  
+                  },
+                  {
+                    "type": "all",
+                    "maximumWarning": "15kb", 
+                    "maximumError": "11kb"
+                  },
+                  {
+                    "type": "allScript",
+                    "maximumWarning": "800kb", 
+                    "maximumError": "850kb"  
+                  },
+                  {
+                    "type": "bundle",
+                    "name": "main-TALQW4KI.js", 
+                    "maximumError": "800kb"   
+                  },
+                  {
+                    "type": "bundle",
+                    "name": "polyfills-ED6LRYKL.js",
+                    "maximumError": "40kb"   
+                  }
               ],
               "outputHashing": "all"
             },
