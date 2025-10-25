@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BACKEND_URL: 'https://secureshare-deployment.onrender.com'
+  BACKEND_URL: 'http://localhost:8080',
 };
