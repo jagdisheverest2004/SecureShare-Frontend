@@ -77,6 +77,7 @@ export class ShareComponent implements OnInit {
     const payload = {
       fileId: this.fileId,
       recipientUsername: this.recipientUsername,
+      isSensitive: this.isSensitive 
     };
 
     this.http.post(this.apiUrl, payload, { responseType: 'text' }).subscribe({
