@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-verifyotp',
@@ -17,8 +18,12 @@ export class VerifyOtpComponent {
   error = '';
   username: string | null;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.username = localStorage.getItem('username'); // fetch username from login step
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private cookieService: CookieService
+  ) {
+    this.username = localStorage.getItem('username');
   }
 
   verify() {
@@ -41,6 +46,16 @@ export class VerifyOtpComponent {
       )
       .subscribe({
         next: (res: any) => {
+
+          if (res && res.jwtToken) {
+            // This 'jwt' cookie will be read by your AuthInterceptor
+             this.cookieService.set('jwt', res.jwtToken, {
+              path: '/',
+              secure: true,
+              sameSite: 'Strict',
+            });
+          }
+
           localStorage.setItem('otpVerified', 'true');
           this.router.navigateByUrl('/dashboard');
         },
